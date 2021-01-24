@@ -1,0 +1,125 @@
+html
+    head
+        meta(charset='utf-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+        // Bootstrap CSS
+        link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css')
+        // html CSS
+        style
+            include ../css/navbar.css
+            include ../css/homepage.css
+            include ../css/homepage-change.css
+
+        title ratemap
+        script.
+           
+        script.
+            function search() {
+            var search = document.getElementById("search").value;
+            window.location = "./search.html?category=" + search;
+            }
+
+            
+            function load(post_id) {
+            window.location = "./goodpage.html?category=" + post_id;
+            //alert('click '+item_id  );
+            }
+
+    body(style='background-color: white;')
+        // Optional JavaScript
+        // jQuery first, then Popper.js, then Bootstrap JS
+        script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
+        script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js')
+        script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+        // homepage.js
+        //script(src='../js/homepage.js')
+        script
+            include ../js/homepage.js
+
+        include navbar.pug
+        
+        // 9picture
+        
+            <div class="demo demo--rotate-carousel">
+            <div class="scene scene--carousel">
+            <div class="carousel" style="transform: translateZ(-576px) rotateY(0deg);">
+            class="carousel__cell">
+            <img src="../img/hotpost/1.PNG" class="hotimg"></div>
+            class="carousel__cell">
+            <img src="../img/hotpost/2.PNG" class="hotimg"></div>
+            class="carousel__cell">
+            <img src="../img/hotpost/3.PNG" class="hotimg"></div>
+            class="carousel__cell">
+            <img src="../img/hotpost/4.PNG" class="hotimg"></div>
+            class="carousel__cell">
+            <img src="../img/hotpost/5.PNG" class="hotimg"></div>
+            class="carousel__cell">
+            <img src="../img/hotpost/6.PNG" class="hotimg"></div>
+            class="carousel__cell">
+            <img src="../img/hotpost/7.PNG" class="hotimg"></div>
+            class="carousel__cell">
+            <img src="../img/hotpost/8.PNG" class="hotimg"></div>
+            class="carousel__cell">
+            <img src="../img/hotpost/9.PNG" class="hotimg"></div>
+            </div>
+            </div>
+            <!--spin
+        //
+            <center>
+            <div>
+            <button class="previous-button"> previous </button>
+            <button class="next-button"> nextbutton </button>
+            </div>
+            </center>
+            </div>
+        // 99999999999
+        //.rwd_slider_container_wrapper
+            .rwd_slider_container
+                .slider_container
+                    div
+                        a(href='index.html')
+                            img(src='http://127.0.0.1/img/hotpost/1.PNG' alt='pure css slider' width='300' height='210')
+                            span.info Image Description 1
+                    div
+                        a(href='index.html')
+                            img(src='http://127.0.0.1/img/hotpost/2.PNG' alt='pure css slider' width='300' height='210')
+                            span.info Image Description 2
+                    div
+                        a(href='index.html')
+                            img(src='http://127.0.0.1/img/hotpost/3.PNG' alt='pure css slider' width='300' height='210')
+                            span.info Image Description 3
+                    div
+                        a(href='index.html')
+                            img(src='http://127.0.0.1/img/hotpost/4.PNG' alt='pure css slider' width='300' height='210')
+                            span.info Image Description 4
+                    div
+                        a(href='index.html')
+                            img(src='http://127.0.0.1/img/hotpost/5.PNG' alt='pure css slider' width='300' height='210')
+                            span.info Image Description 5
+                // end of .slider_container
+                // end of .rwd_slider_container
+                // rwd_slider_container_wrapper
+
+        .container-fluid.col-10.col-md-10.col-lg-10.col-xl-10(style='margin-top: 100px;')
+            .table(style='margin-left: auto; margin-right: auto;')
+                .fpost
+                img.row.col-12.col-lg-12.col-xl-12.align-items-center(style='margin: auto;margin-bottom: 20px;width: 620px;height:340' src='../img/hotpost/1.PNG')
+                script(src='../js/Homepage.js' charset='utf-8')
+                img(src='../img/postfcard/tag.PNG' style='width: 50px;margin-left: 14px;margin-right: 14px;')
+                span(style='margin-right: 14px;')
+                    | &#x98A8;&#x666F;
+                |         #
+                span
+                    | &#x65E5;&#x6708;&#x6F6D;
+                a(onclick="javascript:location.href='http://www.wibibi.com'" style='width: 50px;float:right;')
+                    img(src='../img/postfcard/tag.PNG' style='width: 50px;float:right;')
+                div(style='margin-top: 10px;margin-left: 14px;;margin-bottom: 0px')
+                    | &#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!&#x9B5A;&#x86CB;&#x5F88;&#x597D;&#x5403;!
+
+        #canvas.center() 
+            // 手機直col-* 手機橫col-sm-* 平板直col-md-* 平板橫col-lg-* 桌電col-xl-*
+            //.table(style='margin:0px auto;')
+            //img.align-items-center(style='margin: auto;')
+            //script(src='../js/http_homepage.js' charset='utf-8')
+            script
+                include ../js/http_homepage.js

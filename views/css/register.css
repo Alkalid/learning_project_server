@@ -1,0 +1,43 @@
+.registerform {
+    margin: auto;
+    text-align: center;
+}
+
+div {
+    font-family: 微軟正黑體;
+    font-weight: 900;
+}
+.bts {
+    outline: none;
+    border: none;
+    width :90px;
+    height: 30px;
+    border-radius: 5px;
+    color: white;
+}
+
+#but0 {
+    background-color: rgb(45, 83, 199);
+}
+
+#but1 {
+    background-color: rgb(92, 113, 175);
+}
+
+#but2 {
+    background-color: rgb(45, 83, 199);
+}
+#but3 {
+    background-color: rgb(92, 113, 175);
+}
+
+#but4 {
+    background-color: rgb(45, 83, 199);
+}
+:placeholder-shown{
+    font-family: 微軟正黑體;
+}
+
+:optional {
+    font-family: 微軟正黑體;
+}

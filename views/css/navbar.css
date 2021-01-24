@@ -1,0 +1,25 @@
+
+.nav-img {                   /*icon規格*/
+  width: 60px;
+  height: 50px;
+  margin: 0px;
+}
+.nav-img-logo {              /*logo規格*/
+  width: 50px;
+  height: 50px;
+  margin: 0px;
+}
+
+li {                        /*去除點*/
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+    
+}
+
+ul {
+  list-style: none;   /* 移除項目符號 */
+  margin: 0;
+  padding: 0;
+}
+

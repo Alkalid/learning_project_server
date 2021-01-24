@@ -1,0 +1,157 @@
+head
+    title user
+    meta(charset="utf-8")
+    // Bootstrap CSS
+    link(rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css")
+    style
+        include ../css/homepage.css
+        include ../css/homepage-change.css
+        
+    style.
+        .username {
+        background-color:rgb(98, 94, 132);
+        width: 100px;
+        height: 100px;;
+        text-align: center;
+        border-radius: 100px;
+        margin-top: 90px;
+        margin-bottom: 40px;
+        margin: auto;
+        border: none;
+        }
+        .username:hover {
+        background-color:rgb(75, 72, 100);
+        }
+        .username:focus {
+        background-color:rgb(63, 62, 80);
+        outline: none;
+        }
+        .nocolor {
+        background-color:rgb(75, 72, 100,0);
+        width: 180px;
+        text-align: center;
+        margin: 8px;
+        border: none;
+        margin-top:10px;
+        margin-bottom:50px;
+        }
+        .userdata {
+        width: 630px;
+        margin-left: auto;
+        margin-right: auto;
+        }
+        .nocolor:focus{
+        outline: none;
+        }
+        .p_user {
+        font-size: larger;
+        font-weight: 900;
+        font-family: Microsoft JhengHei;
+        color:rgb(75, 72, 100);
+        text-align: center;
+        margin: auto;
+        }
+        .container{
+        width: 630px; /*630px = 42vw*/
+        margin-left: auto;
+        margin-right: auto;
+        }
+        .card{
+        /* 設定父親定位點 */
+        width: 180px;/*180px = 12vw*/
+        height: auto; /*120px:auto*/
+        float:left;
+        margin: 10px;
+        }
+        img{
+        display: block;
+        width: 100%;
+        }
+        .info{
+        /*   display: none; */
+        opacity: 0;
+        position: absolute;
+        box-sizing: border-box;
+        background-color: rgba(0,0,0,.3);
+        top: 0;
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        padding-top: 40px;
+        }
+        .info p{
+        color: #fff;
+        }
+        .info:hover{
+        opacity: 1;
+        }
+        .div_user {
+        width: 580px;
+        margin: auto;
+        text-align: center;
+        }
+        #name {
+        color: white;
+        }
+        #place {
+        color: white;
+        }
+        button {
+        outline:none;
+        }
+        .userbox {
+        margin-top: 60px;
+        margin-bottom: 30px;
+        }
+
+body
+    script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
+    script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js')
+    script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+
+    include navbar.pug
+    br
+    br
+    br
+    .userbox.div_user
+        button.username(type="button")
+            p#p_name.p_user
+        button.username(type="button" onclick="location.href='/shop'")
+            p#place.p_user 經營
+    .userdata   
+        button.nocolor(type="button")
+            p#post_num.p_user
+            p.p_user 文章
+        button.nocolor(type="button" onclick="history.back()")
+            p#fan_num.p_user
+            p.p_user 粉絲
+        button.nocolor(type="button" onclick="history.back()")
+            p#follow_num.p_user
+            p.p_user 追蹤
+    
+    include comment.pug
+
+    script
+        include ../js/http_user.js
+
+    script.
+
+        if(typeof(getCookie("uid")) == 'undefined')
+        {
+            window.location = "/login" ;
+        }
+        else
+        {
+            var cookie_name = getCookie("name");
+            var username = document.getElementById('p_name');
+            username.textContent = cookie_name;
+            username.setAttribute("style", "color:White;");
+        }
+
+
+        function getCookie(name) {
+            const value = `; ${document.cookie}`;
+            const parts = value.split(`; ${name}=`);
+            if (parts.length === 2) return parts.pop().split(';').shift();
+        }
+    

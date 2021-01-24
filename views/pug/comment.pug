@@ -1,0 +1,38 @@
+script
+    include ../js/comment.js
+
+style
+    include ../css/comment.css
+
+
+div(style="text-align: center;margin-left: auto;")
+    #zhezhao.zhezhao
+        // 留言區
+    #login.login(style="text-align: left;")
+        label(style="width:6%;")
+            img(src="https://upload.cc/i1/2020/06/10/271STk.png" style="width:100%;")
+            button#btclose(onclick = "btclose()")
+            // 關閉介面
+        img#img_comment( style="position:fixed;height:auto;width:60%;left:6%;opacity: 1;")
+        // 111111111111
+        div(style="float: right;width: 28%;height:100%;")
+            div#div_comments(style="width: 100%;height:90%;float: right;resize:none;overflow:auto;background-color :rgb(65, 62, 62);margin-bottom: 0%;display: block;")
+                
+                //div(style="border-bottom: white solid 2px;")
+                    div
+                        div(style="color:white;font-family:微軟正黑體;font-size: large;margin-left: 10px;")
+                            | 123;:asddddddddddddddddddddddada
+                            br
+                            |        123121
+                            br
+                            |        114444444444443
+                            br
+                            |         123154
+                            br
+                        div(style="border-bottom: white solid 1px;")
+            div(style="width: 100%;")
+                textarea#textarea_comments(style="width: 90%;height:10%;float: right;resize:none;background-color: rgb(139, 145, 155);display: block;")  
+                label(style="width: 10%;")
+                    img(style="width: 100%;height:10%;outline: none;" src="https://upload.cc/i1/2020/06/10/O7ywSZ.png")
+                    button(style="width: 0%;height:10%;" type="button" onclick="newPostComment()")
+

@@ -1,0 +1,175 @@
+html
+    head
+        meta(charset='utf-8')
+        meta(name='viewport' content='width=device-width, initial-scale=1, shrink-to-fit=no')
+        // Bootstrap CSS
+        link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css')
+        // html CSS
+        style
+            include ../css/post.css
+            //include ../css/basic.css
+            include ../css/dropzone.css
+
+        title ratemap
+
+    body(style='background-color: white;')
+        // Optional JavaScript
+        // jQuery first, then Popper.js, then Bootstrap JS
+        script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
+        script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js')
+        script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+        //script
+            include ../js/dropzone.js
+        include navbar.pug
+        br
+        br
+        br
+        br
+        br
+        div#content(style='text-align: center;')
+            div
+                p.choice_class 上傳您的貼文
+        br
+        br
+        br
+        //div(style='width:300px;')
+            form(id='uploadingfile' name='uploadForm' action="/file-upload" method="POST" class="dropzone")
+                div(class="fallback")
+                    input(type="file" name="file")
+            
+        
+        form(method='POST' enctype='multipart/form-data' action='/ProcessServer/FileOperate/fileUpServlet'  )
+            //input(type='submit' name='submit' value='提交')           //子嘉code
+            //input(type='submit' value='Upload' onclick="uploadd()")
+            //input(type='reset' name='reset' value='重置')
+
+            
+            //div(class="dropzone-previews")
+
+            div#content(style='text-align: center;')
+                label
+                    img.postframe(src='https://cdn.dribbble.com/users/1187836/screenshots/5922007/1-check.gif')
+                    //input(type='file' name='fin1' hidden='')
+                    input(id='uploadingfile' type='file' accept="image/*" onchange="checkupload(this)" name='file' class="custom-file-input"  )
+                    //input(type ="file" class="custom-file-input" data-target="file-uploader" id="file-uploader")
+                br
+                img#post_img.postframe(src='https://upload.cc/i1/2020/06/11/ZUHJxE.gif')
+                //img#post_img.postframe
+
+
+            #content(style='text-align: center;')
+                br
+                br
+                br
+                #post
+                    div
+                        
+                        textarea#where.transition(placeholder='這裡是哪裡啊?')
+                        p 標註你的地點;
+                    div
+                        
+                        textarea#what.transition(placeholder='在這裡過得愉快嗎?寫點什麼吧!')
+                        p 評論一下吧!
+                    div
+                        
+                        textarea#title.transition(placeholder='')
+                        p #hashtag
+                    //div
+                        p 你的體驗分是? 
+                        .stars-div(style='text-align: center;')
+                            .stars(style='text-align: center;')
+                                input#star-5.star-input.star-5(type='radio' name='star')
+                                label.star-icon.star-5(for='star-5')
+                                input#star-4.star-input.star-4(type='radio' name='star')
+                                label.star-icon.star-4(for='star-4')
+                                input#star-3.star-input.star-3(type='radio' name='star')
+                                label.star-icon.star-3(for='star-3')
+                                input#star-2.star-input.star-2(type='radio' name='star')
+                                label.star-icon.star-2(for='star-2')
+                                input#star-1.star-input.star-1(type='radio' name='star')
+                                label.star-icon.star-1(for='star-1')
+                
+                script.
+                    function checkall() {
+                        if(document.getElementById("where").value == "" || document.getElementById("what").value === "") {
+                            alert(100);
+                        }
+                    }
+                div(style='text-align: center;')
+                    input#postBt(type='button' value='上傳' onclick='uploadd()')
+                #comment
+
+        script.
+            function uploadd() {
+                if(document.getElementById("where").value == "" || document.getElementById("what").value == "") {
+                    alert("輸入地點與內容");
+                }
+                else {
+
+                    document.getElementById('postBt').disabled = "disabled";
+
+                    let data = new FormData();
+                    var uid = getCookie("uid");
+                    data.append("file",document.getElementById('uploadingfile').files[0]);
+                    data.append("address",document.getElementById('where').value);
+                    data.append("content",document.getElementById('what').value);
+                    data.append("title",document.getElementById('title').value);
+                    data.append("uid", uid);
+                    $.ajax({
+                        url: 'http://114.35.11.36:3500/upload',
+                        type: 'POST',
+                        cache: false,
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        success: function (e) 
+                        {
+                            //alert(e);
+                            reData = e;
+
+                            if(reData == 'fail')
+                            {
+                                alert('帳號密碼錯誤');
+                            }
+                            else if(reData=='success')//正確 跳轉
+                            {
+                                //解析json
+                                alert('success');
+                                window.location = "/user" ;
+
+                            }
+                        }
+                    }).done(function(res) {
+                    }).fail(function(res) {});
+
+
+                }
+            }
+
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+
+            function checkupload(e) {
+                var file = e.files[0];
+                var ing = document.getElementById("post_img");
+                ing.setAttribute("src", URL.createObjectURL(e.files[0]) );
+                if (!file) {
+                    return;
+                    alert("fail");
+                }
+                else {
+                    //alert("success");
+                    //alert(e.files[0].mozFullPath);
+                    //alert(URL.createObjectURL(e.files[0]));
+                }
+
+                //檔案上傳
+                //...
+                //檔案上傳
+
+                //上傳後將檔案清除
+                //e.value = '';
+            }

@@ -1,0 +1,98 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        title 登入頁面
+        // CSS
+        link(rel='stylesheet' href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css')
+        style
+            include ../css/login.css
+            include ../css/navbar.css
+        //link(rel="stylesheet" type="text/css" href="../css/login.css")
+        //script(type="text/javascript" src="login.js")
+        script
+            include ../js/login.js
+
+    body
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        //include navbar.pug
+        //nav bar
+
+        div(style="text-align: center;")
+            img(src="http://114.35.11.36/img/navbaricon/login.png" style="width: 550px;margin-top: 70px;")
+        div(style="text-align: center;")
+            img(src="http://114.35.11.36/img/navbaricon/logotitle.png" style="width: 500px;margin-top: -60px;")
+        form(method="post" action="login.js" style="text-align: center;margin-top: 30px;margin-bottom: 40px;")
+            div
+                input#username.text_field(type="text" placeholder="帳號")
+            div
+                input#password.text_field(type="password" placeholder="密碼")
+            div
+                input#btn_login.text_field(type="button" value="登入" onclick="login();")
+            div
+                input#btn_regist.text_field(type="button" value="註冊" onclick="regist();")
+                // url
+
+        script.
+            //確認有沒有登入 6/11
+            
+
+            if(typeof(getCookie("uid")) != 'undefined')
+            {
+                window.location = "/home" ;
+            }
+
+            function getCookie(name) {
+                const value = `; ${document.cookie}`;
+                const parts = value.split(`; ${name}=`);
+                if (parts.length === 2) return parts.pop().split(';').shift();
+            }
+
+
+
+            function regist() {
+                location.href='/register';
+            }
+
+            function login() {
+                var reData; //回傳資料
+                var account = document.getElementById('username').value;
+                var password = document.getElementById('password').value;
+                if (account != '' && password != '' ) 
+                {
+                    jQuery.support.cors = true;
+                    $.ajax({
+                        url: 'http://114.35.11.36:3500/logindata',
+                        data: ';' + account + '@' + password,
+                        datatype: "json",
+                        success: function (e) 
+                        {
+                            //alert(e);
+                            reData = e;
+                            var userdata = reData.toString().split(';');//1:uid 2:name
+                            if(reData == 'fail')
+                            {
+                                alert('帳號密碼錯誤');
+                            }
+                            else if(userdata[0]=='success')//正確 跳轉
+                            {
+                                //設定cookie
+                                document.cookie = "uid="+ userdata[1] + ";path=/";
+                                document.cookie = "name="+ userdata[2] + ";path=/";
+                                //alert('success uid= ' + userdata[1]);
+                                //跳頁
+                                window.location = "/home" ;
+                                
+                            }
+                        }
+
+                    })
+                }
+                else
+                {
+                    alert('帳號密碼不可空白');
+                }
+            }

@@ -1,0 +1,158 @@
+uploadForm.input.file-upload-button {
+    background-color:solid yellow;
+    color:solid #7cfc00;
+}
+
+.post {
+    width:80px;
+}
+
+.postframe {
+    border:solid 1px;
+    border-color: black;
+    padding: 30px;
+    width: 400;
+    height: 300;
+    margin: auto;
+}
+
+.transition {
+    -webkit-transition: all 0.5s linear;
+    -moz-transition: all 0.5s linear;
+    -o-transition: all 0.5s linear;
+    -ms-transition: all 0.5s linear;
+    transition: all 0.5s linear;
+    margin: auto;
+    padding: 20px;
+}
+#post {
+    margin: auto;
+}
+#content {
+    margin: auto;
+}
+#postBt {
+    border:none;
+    background-color:#3EADC5;
+    color:white;border-radius:5px;
+    width:80px;
+    height:30px;
+    margin:auto;
+}
+
+.rate {
+    width: 60px;
+}
+
+.rate-top {
+    width: 60px;
+}
+
+div {
+    margin: auto;
+}
+
+/*-------------------------*/
+.stars-div { 
+    margin:auto;
+    float: left;
+    padding-left: 27%;
+} 
+
+.stars { 
+    display: inline-block; 
+    width: 100% 
+} 
+
+.star-input { 
+    display: none; 
+} 
+
+.star-icon {
+    margin:auto;
+    float: right;
+    padding: 10px; 
+    font-size: 80px;
+    padding:auto;
+} 
+
+.star-input:checked ~ .star-icon:before {
+     
+    content: '★'; 
+    color: rgb(253, 224, 7); 
+} 
+
+.star-icon:hover:before, .star-icon:hover ~ .star-icon:before { 
+    content: '★'; 
+    color: rgb(253, 224, 7); 
+} 
+
+.star-icon:before { 
+    content: '★';
+    color:gray;
+    font-family: "iconfont"; 
+} 
+/**/
+
+#content #post,
+#comment p {
+    zoom: 1;
+}
+
+#content #post:after,
+#comment p:after {
+    display: block;
+    height: 0;
+    clear: both;
+    visibility: hidden;
+    overflow: hidden;
+    content: '.';
+}
+
+#content {
+    margin: 0 auto;
+    width: 960px;
+    overflow: hidden;
+}
+
+#content #post {
+    margin-bottom: 15px;
+    padding-bottom: 15px;
+    border-bottom: 1px #676161 dashed;
+    height: 556px;
+}
+
+#content #post textarea { /*留鹽區大小650*/
+    display: block;
+    padding: 0px;
+    width: 650px;
+    height: 80px;
+    border: 1px #504f51 solid;
+    border-radius: 05px;
+    resize: none;
+    outline: none;
+    margin: auto;
+    margin-top: 20px;
+}
+
+#content #post textarea:hover {
+    border: 1px #504f51 solid;
+    background: #dcdadb;
+}
+
+#content #post #postBt,
+#content #post #clearBt {
+    margin: auto;
+    margin-top: 20px;
+}
+
+*{
+    font-family: 微軟正黑體;
+    font-size: medium;
+    font-weight: 900;
+}
+
+.choice_class {
+    font-size: 60px;
+    font-family: 微軟正黑體;
+}

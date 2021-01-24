@@ -1,0 +1,125 @@
+html
+    head
+        title register
+        meta(charset='utf-8')
+        meta(name='description' content='Free Web tutorials')
+        meta(name='keywords' content='HTML,CSS,XML,JavaScript')
+        // css
+        
+        style
+            include ../css/register.css
+            include ../css/post.css
+        script(type='text/javascript' src='register.js')
+    body
+        <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+        <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        br
+        .registerform
+            div
+                | 名稱   
+                input#user_name(type='text' placeholder='請輸入名稱')
+            br
+            div
+                | 帳號   
+                input#account(type='text' placeholder='請輸入帳號')
+            br
+            div
+                | 密碼   
+                input#password(type='text' placeholder='請輸入密碼')
+            br
+            div
+                | 確認   
+                input#repassword(type='text' placeholder='再輸入密碼')
+            br
+            div
+                | 性別   
+                select#gender(name='sex')
+                    option(value='boy') 男
+                    option(value='girl') 女
+            br
+            span
+                button#but1.bts(value='取消' onclick='tologin();')
+                    div
+                        | 取消
+            span
+                button#but2.bts(value='註冊' onclick='regist();')
+                    div
+                        | 註冊
+        
+        script.
+            
+
+            function tologin() {
+                location.href='/login';
+            }
+
+            function regist() {
+                var reData; //回傳資料
+                var user_name = document.getElementById('user_name').value;
+                var gender = document.getElementById('gender').value;
+                var account = document.getElementById('account').value;
+                var password = document.getElementById('password').value;
+                if (account != '' && password != '' && user_name != '' && gender != '') 
+                {
+
+                    let data = new FormData();
+                    data.append("user_name",user_name);
+                    data.append("gender",gender);
+                    data.append("account",account);
+                    data.append("password", password);
+
+                    jQuery.support.cors = true;
+                    $.ajax({
+                        url: 'http://114.35.11.36:3500/registerdata',
+                        type: 'POST',
+                        cache: false,
+                        data: data,
+                        processData: false,
+                        contentType: false,
+                        success: function (e) 
+                        {
+                            //alert(e);
+                            reData = e;
+
+                            if(reData == 'fail')
+                            {
+                                alert('帳號密碼錯誤');
+                            }
+                            else if(reData=='success')//正確 跳轉
+                            {
+                                //解析json
+                                alert('success');
+                                //跳頁
+                                window.location = "/login" ;
+
+                            }
+                        }
+
+                    })
+                }
+                else
+                {
+                    alert('帳號密碼不可空白');
+                }
+
+            }

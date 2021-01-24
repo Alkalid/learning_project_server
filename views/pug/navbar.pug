@@ -1,0 +1,74 @@
+style
+  include ../css/navbar.css
+
+nav.navbar.navbar-expand-lg.navbar-dark.bg-dark.fixed-top
+
+  a.nav-link(href='home')
+    img.nav-img-logo(onclick='home()' src='http://114.35.11.36/img/navbaricon/logo.PNG' title='home')
+  
+  button.navbar-toggler(title="expand" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation")
+    span.navbar-toggler-icon.navbar-light
+
+  div#navbarNavDropdown.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto.drop-down-menu
+      //li
+        a.nav-link(href='home')
+          img.nav-img-logo(onclick='home()' src='http://114.35.11.36/img/navbaricon/logo.PNG' title='home')
+      // search
+      li
+        a.nav-link(href='search')
+          img.nav-img(onclick='search()' src='http://114.35.11.36/img/navbaricon/search.PNG' title='search')
+      // input
+      li.nav-item
+        input#search_nav.rounded.nav-link(type='text' style='margin: 10px; color: black;' placeholder='想去哪嗎?')
+      // post
+      li
+        a.nav-link(href='post')
+          img.nav-img(onclick='post()' src='http://114.35.11.36/img/navbaricon/post.PNG' title='post')
+      // new
+      //li
+        a.nav-link(href='../html/icf/icf_new.html')
+          img.nav-img(onclick='newing()' src='http://114.35.11.36/img/navbaricon/new.PNG' title='new')
+      // user
+      li
+        a.nav-link(href='user')
+          img.nav-img(onclick='user()' src='http://114.35.11.36/img/navbaricon/user.PNG' title='user')
+      // setting
+      li
+        a.nav-link 
+          p#username_nav(style='color:White; font-size:25px; font-family: 微軟正黑體;')
+          
+    ul
+      li
+        a.nav-link
+          img.nav-img(onclick='logout()' src= "http://114.35.11.36/img/navbaricon/logout.PNG" title='user')
+
+script.
+  //var x = document.cookie;
+  //alert(x + '   nav');
+  //alert(x + '   nav');
+ 
+  if(getCookie("uid") != '')
+  {
+    var username_nav = document.getElementById('username_nav');
+    username_nav.innerHTML = getCookie("name");
+  }
+
+
+  function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+  }
+
+  function search()
+  {
+    var search = document.getElementById("search_nav").value;
+    document.cookie = "search="+ escape(search) + ";path=/";
+  }
+
+  function logout()
+  {
+    window.location = "/login" ;
+    document.cookie = "uid"+"=;expires="+(new Date(0)).toGMTString() + ";path=/";
+  }

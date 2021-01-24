@@ -1,0 +1,72 @@
+.choice_class {
+    font-size: 60px;
+    font-family: 微軟正黑體;
+}
+.radio_class {
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+  }
+.radio_class::after {
+    height: 1.5rem;
+    width: 1.5rem;
+    border-radius: 50%;
+    background-color: green;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+
+  .postframe {
+    border:solid 1px;
+    border-color: black;
+    padding: 30px;
+    width: 400;
+    height: 300;
+    margin: auto;
+}
+
+label {
+  font-size: 25px;
+  font-family: 微軟正黑體;
+}
+
+#but0 {
+  background-color: rgb(45, 83, 199);
+}
+
+#but1 {
+  background-color: rgb(92, 113, 175);
+}
+
+#but2 {
+  background-color: rgb(45, 83, 199);
+}
+#but3 {
+  background-color: rgb(92, 113, 175);
+}
+
+#but4 {
+  background-color: rgb(45, 83, 199);
+}
+
+div {
+  font-family: 微軟正黑體;
+  font-weight: 900;
+  margin: auto;
+}
+.bts {
+  outline: none;
+  border: none;
+  width :90px;
+  height: 30px;
+  border-radius: 5px;
+  color: white;
+}
+
+.input_imgrdy {
+  background-color:rgb(45, 83, 199);
+  color:white;
+  border-radius: 5px;
+  width :90px;
+  height: 30px;
+}

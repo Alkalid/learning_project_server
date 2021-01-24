@@ -1,0 +1,111 @@
+html
+    head
+        title shop
+        meta(charset="utf-8")
+        meta(name="description" content="Free Web tutorials")
+        meta(name="keywords" content="HTML,CSS,XML,JavaScript")
+
+        style
+            include ../css/shop.css
+        script
+            include ../js/shop.js
+
+    body(onload="checkUserFlag()")
+        script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
+        script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js')
+        script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js')
+        script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+
+        div(style="text-align: center;")
+            #forward(style='display:none')
+                br
+                br
+                p.choice_class 您要註冊的是?
+                input.radio_class(type="radio" name="place" value="商家")
+                label &#x5546;&#x5BB6;
+                br
+                input.radio_class(type="radio" name="place" value="景點")
+                label &#x666F;&#x9EDE;
+                br
+                br
+                br
+                button#but0.bts(value="確定" onclick="checkplacetype();")
+                    div &#x78BA;&#x5B9A;
+                br
+                br
+            form#form_post(method='POST' enctype='multipart/form-data' action='/ProcessServer/FileOperate/fileUpServlet' style='display:none')
+                div(style='text-align: center;')
+                    br
+                    p#p_postTitle.choice_class
+                    br
+                    br
+                    label
+                        img.postframe(src='https://cdn.dribbble.com/users/1187836/screenshots/5922007/1-check.gif')
+                        
+                        input(id='uploadingfile' type='file' accept="image/*" onchange="checkupload(this)" name='file' class="custom-file-input" hidden = ""  )
+                        //input(type ="file" class="custom-file-input" data-target="file-uploader" id="file-uploader")
+                    br
+                    br
+                    br
+                    img#post_img.postframe(src='https://upload.cc/i1/2020/06/11/ZUHJxE.gif')
+                    br
+                    br
+                    br                
+
+                    input.input_imgrdy(type ="button" value="確定" onclick="ImageReady()")
+                    br  
+                    
+            
+            div#div_newshop(style='display:none')
+                br
+                br
+                p.choice_class 為您的商家新增資訊
+                br
+                br
+                div
+                    input#newshopname(type="text" placeholder="商店名稱" )
+                br
+                div
+                    input#newshopaddress(type="text" placeholder="商店地址" )
+                br
+                div
+                    input#newshopphone(type="text" placeholder="商店電話" )
+                br
+            
+            div#div_newspot(style='display:none')
+                br
+                br
+                p.choice_class 為您的景點新增資訊
+                br
+                br
+                div
+                    input#newspotname(type="text" placeholder="景點" )
+                br
+                div
+                    input#newspotaddress(type="text" placeholder="景點位置" )
+                br
+
+
+            span
+                button#but1.bts(value="取消" onclick="back();" style='display:none') 
+                    div &#x53D6;&#x6D88;
+            span
+                button#but2.bts(value="註冊" onclick="registered();" style='display:none' )
+                    div &#x8A3B;&#x518A;
+
+            div
+                p#printshopname(style='display:none') &#x5546;&#x5E97;&#x540D;&#x7A31;:
+            div
+                p#printshopaddress(style='display:none') &#x5546;&#x5E97;&#x5730;&#x5740;:
+            div
+                p#printshopphone(style='display:none') &#x5546;&#x5E97;&#x96FB;&#x8A71;:
+            div
+                p#printspotname(style='display:none') &#x666F;&#x9EDE;&#x59D3;&#x540D;:
+            div
+                p#printspotaddress(style='display:none') &#x666F;&#x9EDE;&#x5730;&#x5740;:
+            span
+                button#but3.bts(value="返回" onclick="back();" style='display:none')
+                    div &#x8FD4;&#x56DE;
+            span
+                button#but4.bts(value="更改" onclick="change();" style='display:none' )
+                    div &#x66F4;&#x6539;

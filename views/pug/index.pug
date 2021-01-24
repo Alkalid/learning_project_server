@@ -1,0 +1,47 @@
+doctype html
+head
+  style
+        include ../css/Css.css
+  meta(charset='utf-8')
+  meta(name='viewport', content='width=device-width, initial-scale=1, shrink-to-fit=no')
+  // Bootstrap CSS
+  link(rel='stylesheet', href='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css')
+  // html CSS
+  link(rel='stylesheet', href='../css/CSS.css', type='text/css')
+  title &#x9996;&#x9801;
+  script(src='https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js')
+// Optional JavaScript
+// jQuery first, then Popper.js, then Bootstrap JS
+script(src='https://code.jquery.com/jquery-3.3.1.slim.min.js')
+script(src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js')
+script(src='https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js')
+script(src='https://code.jquery.com/jquery-3.2.1.min.js')
+
+nav.navbar.navbar-expand-lg.navbar-light.bg-orange.fixed-top
+  a.navbar-brand(href='homepage.html')
+    img.logo-img(src='http://127.0.0.1/img/web-原民良品-LOGP.png')
+  button.navbar-toggler(title='expand', type='button', data-toggle='collapse', data-target='#navbarNavDropdown', aria-controls='navbarNavDropdown', aria-expanded='false', aria-label='Toggle navigation')
+    span.navbar-toggler-icon
+  #navbarNavDropdown.collapse.navbar-collapse
+    ul.navbar-nav.mr-auto.drop-down-menu
+      li.nav-item
+        input#search.rounded.nav-link(type='text', style='margin: 10px;', placeholder=' 請輸入商品關鍵字')
+      li
+        a.nav-link
+          img.nav-img(onclick='search()', src='http://127.0.0.1/img/search.PNG', title='search')
+    ul.navbar-nav
+      ul.navbar-nav.mr-auto.drop-down-menu
+        li.nav-item
+          a.nav-link(href='../html/login.html')
+            img.nav-img(src='http://127.0.0.1/img/logout.PNG', title='logout')
+br
+br
+br
+br
+br
+
+.container-fluid.col-10.col-md-10.col-lg-10.col-xl-10(style='margin-top: 100px;')
+  // 手機直col-* 手機橫col-sm-* 平板直col-md-* 平板橫col-lg-* 桌電col-xl-*
+  .table(style='margin-left: auto; margin-right: auto;')
+    img.row.col-12.col-lg-12.col-xl-12.align-items-center(style="margin-left: auto; margin-right: auto;")
+    script(src='../scripts/homepage.js', charset='utf-8')

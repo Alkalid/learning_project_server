@@ -1,0 +1,205 @@
+.nav-img {
+  mix-blend-mode: multiply;
+  width: 50px;
+  height: 50px;
+  padding: 3px;
+}
+
+.goods-img {
+  mix-blend-mode: multiply;
+  width: 300px;
+  height: 300px;
+  padding: 0;
+  margin: 10px;
+}
+
+.logo-img {
+  mix-blend-mode: multiply;
+  width: 150px;
+  height: 60px;
+  padding-top: 7px;
+  padding-bottom: 2px;
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
+.goods-frame {
+  border: rgb(243, 140, 22) 5px solid;
+}
+
+.center {
+  text-align: float-center;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.bg-orange {
+  background-color: rgb(243, 140, 22);
+}
+
+ul { /* 取消ul預設的內縮及樣式 */
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  background-color: rgb(243, 140, 22); /* 原色為主留白 */
+}
+
+a {
+  font-family: "Microsoft JhengHei", monospace, sans-serif;
+  font-weight: 700;
+  font-size: large;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Microsoft JhengHei", monospace, sans-serif;
+  font-weight: 700;
+  color: rgb(156, 97, 8);
+}
+
+ul.drop-down-menu {
+  background-color: rgb(243, 140, 22);
+  display: block;
+  overflow: visible;
+}
+
+ul.drop-down-menu li {
+  position: relative;
+  white-space: nowrap;
+  border-right: rgb(243, 140, 22);
+}
+
+ul.drop-down-menu > li {
+  float: left; /* 只有第一層是靠左對齊 */
+  background-color: rgb(243, 140, 22);
+}
+
+ul.drop-down-menu ul li {
+  border-top: rgb(156, 97, 8) 3px solid;
+  border-left: rgb(156, 97, 8) 3px solid;
+  border-right: rgb(156, 97, 8) 3px solid;
+}
+
+ul.drop-down-menu > li:last-child {
+  border-right: none;
+  background-color: rgb(243, 140, 22);
+}
+
+ul.drop-down-menu ul li:last-child {
+  border-bottom: rgb(156, 97, 8) 3px solid;
+}
+
+ul.drop-down-menu a {
+  background-color: rgb(243, 140, 22); /* 原色為主 */
+  color: rgb(105, 8, 8);
+  display: block;
+  padding: 10px;
+  text-decoration: none;
+}
+
+ul a:hover { /* 滑鼠滑入按鈕變色 */
+  background-color: rgb(223, 119, 8);
+  color: #fff;
+}
+
+ul.drop-down-menu a:hover { /* 滑鼠滑入按鈕變色 */
+  background-color: rgb(223, 119, 8);
+  color: #fff;
+}
+
+ul.drop-down-menu li:hover > a { /* 滑鼠移入次選單上層按鈕保持變色 */
+  background-color: rgb(223, 119, 8);
+  color: #fff;
+}
+
+ul.drop-down-menu ul { /* 第一層隱藏狀態 */
+  position: absolute;
+  z-index: 100;
+  left: 0%;
+  top: 100%;
+  min-width: 100px;
+  display: none;
+}
+
+ul.drop-down-menu ul ul { /* 第三層以後的選單出現位置與第二層不同 */
+  z-index: 101;
+  top: -3px;
+  left: 100%;
+  background-color: rgb(243, 140, 22);
+}
+
+ul.drop-down-menu li:hover > ul { /* 滑鼠滑入展開次選單 */
+  display: block;
+}
+
+div {
+  float: left;
+}
+
+table {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.tab {
+  overflow: hidden;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
+.tab button {
+  background-color: inherit;
+  float: left;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 14px 16px;
+  transition: 0.3s;
+  font-size: 17px;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  background-color: #ddd;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  background-color: #ccc;
+}
+
+/* Style the tab content */
+.tabcontent {
+  display: none;
+  padding: 6px 12px;
+  border: 1px solid #ccc;
+  border-top: none;
+  text-align: left;
+}
+
+.tabcontent * {
+  text-align: left;
+}
+
+.tabcontent h3 {
+  font-size: 20px;
+  text-align: left;
+}
+
+.tabcontent p {
+  font-size: 16px;
+  text-align: left;
+}
+
+.form-group input {
+  margin-top: 5px;
+}
+
+.form-group textarea {
+  margin-top: 5px;
+}
