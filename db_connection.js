@@ -321,7 +321,11 @@ function decode_ke(str) //String str
 function getDateTime()
 {
   var d = new Date();
-  date = d.getFullYear().toString() + "-" + (d.getMonth() + 1).toString() + "-" + d.getDate().toString() + " " + d.getHours().toString() + ":" + d.getMinutes().toString() + ":" + d.getSeconds().toString() ;
+  if(d.getMonth() + 1 < 10) {
+    date = d.getFullYear().toString() + "-0" + (d.getMonth() + 1).toString() + "-" + d.getDate().toString() + " " + d.getHours().toString() + ":" + d.getMinutes().toString() + ":" + d.getSeconds().toString() ;
+  } else {
+    date = d.getFullYear().toString() + "-" + (d.getMonth() + 1).toString() + "-" + d.getDate().toString() + " " + d.getHours().toString() + ":" + d.getMinutes().toString() + ":" + d.getSeconds().toString() ;
+  }
   return date;
 }
 
