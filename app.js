@@ -62,31 +62,55 @@ app.ws.use(Router.all('/test', async (ctx, next) => {
         ctx.websocket.send("LiveViewers@" + DBresult);
 
     }
-
-    if (message.split(" ")[0] == "newRecord") {
-      var code = message.split(" ")[1];
-      var rid = db.getSerialnNumber();
-      code = rid + ";" + code;
-
+    //////////////////////////////////////////////////////
+    if (message.split(" ")[0] == "newRecord") { //新觀看紀錄
+      var code = message.split(" ")[1]; //uid + vid
+      let DBresult = "";
+      let rid = "";
+      let isWatching = 0;
       await db                                      //check是不是觀看中
         .checkRecord(code)
         .then(results => {
           DBresult = JSON.stringify(results);
         });
-      if (JSON.stringify(DBresult) == '"[]"') {   // 確定沒在觀看 才新增
         
+      if(JSON.stringify(DBresult) == '"[]"') {//無觀看紀錄
+        isWatching = 0;
+      }
+      else {
+        let RecordArr = JSON.parse(DBresult);
+        let closedate = RecordArr[0]['closedate'];
+        let nowdate = db.getDateTime();
+        rid = RecordArr[0]['rid'];
+        console.log("\n---------------"+ closedate.substring( 0, 10 ) + nowdate.substring( 0, 10 ));
+
+        if( closedate.substring( 0, 10 ) == nowdate.substring( 0, 10 ) ) { //同一天 在一小時內
+          isWatching = 1;
+        }
+        else { //有觀看紀錄但是 time out 標示已經結束
+          await db
+          .completeRecord(rid)
+          .then(results => {
+            DBresult = JSON.stringify(results);
+          });
+          isWatching = 0;
+        }
+      }
+
+      if (isWatching == 0 ) {   // 確定沒在觀看 才新增
+        rid = db.getSerialnNumber();
+        code = rid + ";" + code;
         await db
           .newRecord(code)
           .then(results => {
             DBresult = JSON.stringify(results);
           });
-        ctx.websocket.send("success " + rid);
       }
-      else {
-        ctx.websocket.send("nowWatching ");
-      }
-    }
 
+      ctx.websocket.send("Watching " + rid);
+      
+    }
+    ////////////////
     if (message.split(" ")[0] == "updateCloseDate") {
       var code = message.split(" ")[1];
       await db

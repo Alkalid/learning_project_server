@@ -3,7 +3,7 @@ var mysql = require('mysql');
 const pool = mysql.createPool({
   connectionLimit: 10,
   host: '114.35.11.36',
-  user: 'abc',
+  user: 'learnMain',
   password: '123456',
   database: 'learning_project',
   debug: true,
@@ -82,7 +82,7 @@ const newRecord = data => { //data是vid youtube的id
   var val = data.toString().split(';');
   var col = ["rid", "uid", "vid", "complete", "closedate"];      //
   //var values = [val[0], val[1], val[2], getDateTime()];       //
-  var values = [val[0], val[1], val[2], "-", "-"];              //
+  var values = [val[0], val[1], val[2], "-", getDateTime()];              //
   var InsertContent = InsertTOOL("record_watch", col, values);
   return new Promise((resolve, reject) => {
     pool.query(
@@ -102,13 +102,13 @@ const newRecord = data => { //data是vid youtube的id
 
 const checkRecord = data => {                   //確認使用者現在是不是正在看影片
   var account = data.toString().split(';');
-  console.log(account[0]);
+  
 
   return new Promise((resolve, reject) => {
     //var account = data
     pool.query(
       //'SELECT * FROM user_login WHERE account = ? ; ' ,account[0],
-      'SELECT * FROM record_watch WHERE vid = "' + account[2] + '" AND  uid = "' + account[1] + '" AND  complete = "' + "-" + '"',
+      'SELECT * FROM record_watch WHERE vid = "' + account[1] + '" AND  uid = "' + account[0] + '" AND  complete = "' + "-" + '"',
       (err, rows, fields) => {
         console.log(rows);
         if (err) reject(err);
@@ -116,6 +116,23 @@ const checkRecord = data => {                   //確認使用者現在是不是
       }
     );
   });
+
+};
+
+const completeRecord = data => {  //data = rid           
+
+  return new Promise((resolve, reject) => {
+    
+    pool.query(
+      'UPDATE record_watch SET closedate  = "' + getDateTime() + '" , complete = "y" WHERE rid = "' + data + '"',
+      (err, rows, fields) => {
+        console.log(rows);
+        if (err) reject(err);
+        else resolve(rows);
+      }
+    );
+  });
+
 };
 
 const UpdateCloseDate = data => {                   //確認使用者現在是不是正在看影片
@@ -183,7 +200,7 @@ const UserLogin = data => {
 
 
 
-function checkRecordInsertTOOL(Table, colum, VALUES)  //Table:要插入哪個資料表  colum 欄位  //VALUES: 欄位裡的值
+function InsertTOOL(Table, colum, VALUES)  //Table:要插入哪個資料表  colum 欄位  //VALUES: 欄位裡的值
 {
   //"INSERT INTO shopcart (uid, item_id , name , image) VALUES ('Company Inc', 'Highway 37' , '123' , ' https://upload.cc/i1/2020/01/01/ETaIpo.jpg ' )", 範例指令
   var InsertData = "INSERT INTO " + Table + " (";   //前面 INSERT INTO XXX (
@@ -308,7 +325,7 @@ function getDateTime()
   return date;
 }
 
-module.exports = { getMarks, getSerialnNumber, newMarks, UserLogin, getDateTime, newRecord, newRecordBehavior, checkRecord, getLiveViewers, UpdateCloseDate };
+module.exports = { getMarks, getSerialnNumber, newMarks, UserLogin, getDateTime, newRecord, newRecordBehavior, checkRecord, completeRecord, getLiveViewers, UpdateCloseDate };
 
 //exports.connectSQL = connectSQL;
 //exports.getObject = getObject();
