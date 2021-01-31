@@ -83,8 +83,8 @@ app.ws.use(Router.all('/test', async (ctx, next) => {
           let nowdate = db.getDateTime();
           rid = RecordArr[0]['rid'];
           console.log("\n---------------"+ closedate.substring( 0, 10 )+ "\n" + nowdate.substring( 0, 10 ));
-          console.log(closedate.substring( 0, 10 ).toString() == nowdate.substring( 0, 10 ).toString());
-          if( closedate.substring( 0, 10 ).toString() == nowdate.substring( 0, 10 ).toString() ) { //同一天 在一小時內
+          
+          if( Date.parse(nowdate) - Date.parse(closedate) <= 3600000   ) { //同一天 在一小時內
             isWatching = 1;
           }
           else { //有觀看紀錄但是 time out 標示已經結束

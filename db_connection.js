@@ -124,7 +124,7 @@ const completeRecord = data => {  //data = rid
   return new Promise((resolve, reject) => {
     
     pool.query(
-      'UPDATE record_watch SET closedate  = "' + getDateTime() + '" , complete = "y" WHERE rid = "' + data + '"',
+      'UPDATE record_watch SET complete = "y" WHERE rid = "' + data + '"',
       (err, rows, fields) => {
         console.log(rows);
         if (err) reject(err);
