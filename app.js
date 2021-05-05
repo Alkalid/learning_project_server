@@ -8,27 +8,22 @@ var db = require("./db_connection");
 
 const httpsOptions = {
   key: fs.readFileSync(path.resolve(__dirname, './private.key')),
-  cert: fs.readFileSync(path.resolve(__dirname, './certificate.crt'))
+  cert: fs.readFileSync(path.resolve(__dirname, './certificate.crt'))   //此為ssl的憑證 因為chrome 會阻擋未加密的連線 所以要用wss
 };
 
-
 const app = websockify(new Koa(), {}, httpsOptions);
-
 
 
 // Note it's app.ws.use and not app.use
 // This example uses koa-route
 app.ws.use(Router.all('/test', async (ctx, next) => {
 
-
-
   ctx.websocket.on('message', async (message) => {
     // do something with the message from client 來自client的訊息
     console.log(message);
 
-    if (message.split(" ")[0] == "getDanmo") {
+    if (message.split(" ")[0] == "getDanmo") {    //如果指令是getDanmo 那就回傳影片彈幕
       var code = message.split(" ")[1];
-      //console.log("getDanmo");
 
       var DBresult;
       await db
@@ -59,7 +54,7 @@ app.ws.use(Router.all('/test', async (ctx, next) => {
         .then(results => {
           DBresult = JSON.stringify(results);
         });
-        ctx.websocket.send("LiveViewers@" + DBresult);
+      ctx.websocket.send("LiveViewers@" + DBresult);
 
     }
     //////////////////////////////////////////////////////
@@ -73,31 +68,31 @@ app.ws.use(Router.all('/test', async (ctx, next) => {
         .then(results => {
           DBresult = JSON.stringify(results);
         });
-        
-        if(JSON.stringify(DBresult) == '"[]"') {//無觀看紀錄
-          isWatching = 0;
+
+      if (JSON.stringify(DBresult) == '"[]"') {//無觀看紀錄
+        isWatching = 0;
+      }
+      else {
+        let RecordArr = JSON.parse(DBresult);
+        let closedate = RecordArr[0]['closedate'];
+        let nowdate = db.getDateTime();
+        rid = RecordArr[0]['rid'];
+        console.log("\n---------------" + closedate.substring(0, 10) + "\n" + nowdate.substring(0, 10));
+
+        if (Date.parse(nowdate) - Date.parse(closedate) <= 3600000) { //同一天 在一小時內
+          isWatching = 1;
         }
-        else {
-          let RecordArr = JSON.parse(DBresult);
-          let closedate = RecordArr[0]['closedate'];
-          let nowdate = db.getDateTime();
-          rid = RecordArr[0]['rid'];
-          console.log("\n---------------"+ closedate.substring( 0, 10 )+ "\n" + nowdate.substring( 0, 10 ));
-          
-          if( Date.parse(nowdate) - Date.parse(closedate) <= 3600000   ) { //同一天 在一小時內
-            isWatching = 1;
-          }
-          else { //有觀看紀錄但是 time out 標示已經結束
-            await db
+        else { //有觀看紀錄但是 time out 標示已經結束
+          await db
             .completeRecord(rid)
             .then(results => {
               DBresult = JSON.stringify(results);
             });
-            isWatching = 0;
-          }
+          isWatching = 0;
         }
+      }
 
-      if (isWatching == 0 ) {   // 確定沒在觀看 才新增
+      if (isWatching == 0) {   // 確定沒在觀看 才新增
         rid = db.getSerialnNumber();
         code = rid + ";" + code;
         await db
@@ -108,7 +103,7 @@ app.ws.use(Router.all('/test', async (ctx, next) => {
       }
 
       ctx.websocket.send("Watching " + rid);
-      
+
     }
     ////////////////
     if (message.split(" ")[0] == "updateCloseDate") {
@@ -159,41 +154,4 @@ app.ws.use(Router.all('/test', async (ctx, next) => {
 }));
 
 
-
 app.listen(3000);
-/*
-const router = new Router()
-
-app.ws.use((ctx, next) => {
-  return next(ctx)
-})
-
-router.get('/', async ctx => {
-  ctx.body = '欢迎'
-})
-
-router.all('/websocket/:id', async ctx => {
-  let t = setInterval(function() {
-    let n = Math.random()
-    if(n > 0.3) {
-      let msg = JSON.stringify({ 'id': ctx.params.id, 'n': n })
-      ctx.websocket.send(msg)
-    }
-  }, 1000)
-  ctx.websocket.on('message', msg => {
-    console.log('前端发过来的数据：', msg)
-  })
-  ctx.websocket.on('close', () => {
-    console.log('前端关闭了websocket')
-  })
-})
-
-app
-.ws
-.use(router.routes())
-.use(router.allowedMethods())
-
-app.listen(3000, () => {
-  console.log('koa is listening in 3000')
-})
-*/

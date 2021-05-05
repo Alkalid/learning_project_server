@@ -1,9 +1,9 @@
 var mysql = require('mysql');
 
-const pool = mysql.createPool({
+const pool = mysql.createPool({ ///可以叫做連接池 用來跟資料庫連接
   connectionLimit: 10,
   host: '114.35.11.36',
-  user: 'learnMain',
+  user: 'abc',
   password: '123456',
   database: 'learning_project',
   debug: true,
@@ -25,7 +25,7 @@ const getMarks = data => { //data是vid youtube的id
   return new Promise((resolve, reject) => {
     pool.query(
 
-      'SELECT * FROM marks where  vid = "' + vid + '"' + 'order by time asc',
+      'SELECT * FROM marks where  vid = "' + vid + '"' + 'order by time asc',   //這是sql指令
       (err, rows, fields) => {
         //console.log(rows);
         if (err) reject(err);
@@ -39,9 +39,9 @@ const getMarks = data => { //data是vid youtube的id
 const newMarks = data => { //data是vid youtube的id
   //vid = data;
   var val = data.toString().split(';');
-  var col = ["vid", "content", "time", "emolevel",  "uid",  "hashtag", "date"];      //
-  var values = [val[0], val[1], val[2], "-", val[3], val[4], getDateTime()];       //
-  var InsertContent = InsertTOOL("marks", col, values);
+  var col = ["vid", "content", "time", "emolevel", "uid", "hashtag", "date"];      //InsertTOOL function是我自己設計的函式 方便將新增的資料轉為sql語法
+  var values = [val[0], val[1], val[2], "-", val[3], val[4], getDateTime()];       //col 是欄位名稱
+  var InsertContent = InsertTOOL("marks", col, values);                            //values是要在對應的欄位上填入的值
   return new Promise((resolve, reject) => {
     pool.query(
 
@@ -58,12 +58,11 @@ const newMarks = data => { //data是vid youtube的id
 
 
 const getLiveViewers = data => {                   //獲取線上人數
-  var list = data.toString().split(';');
-  
+  var list = data.toString().split(';')
 
   return new Promise((resolve, reject) => {
     pool.query(
-     
+
       'SELECT COUNT(*) FROM record_watch WHERE vid = "' + list[0] + '" AND  complete = "' + "-" + '"',
       (err, rows, fields) => {
         console.log(rows);
@@ -78,11 +77,10 @@ const getLiveViewers = data => {                   //獲取線上人數
 
 const newRecord = data => { //data是vid youtube的id
   //vid = data;
-  var rid = getSerialnNumber();
+  var rid = getSerialnNumber();             //這是生成亂數的函式，根據時間生成 保障亂數不會重複
   var val = data.toString().split(';');
-  var col = ["rid", "uid", "vid", "complete", "closedate"];      //
-  //var values = [val[0], val[1], val[2], getDateTime()];       //
-  var values = [val[0], val[1], val[2], "-", getDateTime()];              //
+  var col = ["rid", "uid", "vid", "complete", "closedate"];      
+  var values = [val[0], val[1], val[2], "-", getDateTime()];              
   var InsertContent = InsertTOOL("record_watch", col, values);
   return new Promise((resolve, reject) => {
     pool.query(
@@ -98,11 +96,8 @@ const newRecord = data => { //data是vid youtube的id
 
 };
 
-
-
 const checkRecord = data => {                   //確認使用者現在是不是正在看影片
   var account = data.toString().split(';');
-  
 
   return new Promise((resolve, reject) => {
     //var account = data
@@ -120,9 +115,8 @@ const checkRecord = data => {                   //確認使用者現在是不是
 };
 
 const completeRecord = data => {  //data = rid           
-
   return new Promise((resolve, reject) => {
-    
+
     pool.query(
       'UPDATE record_watch SET complete = "y" WHERE rid = "' + data + '"',
       (err, rows, fields) => {
@@ -142,7 +136,7 @@ const UpdateCloseDate = data => {                   //確認使用者現在是�
   return new Promise((resolve, reject) => {
     //var account = data
     pool.query(
-       
+
       'UPDATE record_watch SET closedate  = "' + getDateTime() + '" WHERE vid = "' + account[2] + '" AND  uid = "' + account[1] + '"',
       //'SELECT * FROM record_watch WHERE vid = "' + account[2] + '" AND  uid = "' + account[1] + '" AND  complete = "' + "-" + '"',
       (err, rows, fields) => {
@@ -160,7 +154,7 @@ const newRecordBehavior = data => { //data是vid youtube的id
   //vid = data;
   var val = data.toString().split(';');
   var col = ["rid", "event", "time", "date"];      //
-  var values = [val[0], val[1], val[2] ,getDateTime()];       //
+  var values = [val[0], val[1], val[2], getDateTime()];       //
   var InsertContent = InsertTOOL("record_watch_behavior", col, values);
   return new Promise((resolve, reject) => {
     pool.query(
@@ -176,7 +170,7 @@ const newRecordBehavior = data => { //data是vid youtube的id
 };
 
 const UserLogin = data => {
-  
+
   var account = data.toString().split(';');
   console.log(account[0]);
   return new Promise((resolve, reject) => {
@@ -192,10 +186,6 @@ const UserLogin = data => {
     );
   });
 };
-
-
-
-
 
 
 
@@ -318,13 +308,12 @@ function decode_ke(str) //String str
   return code;
 }
 
-function getDateTime()
-{
+function getDateTime() {
   var d = new Date();
-  if(d.getMonth() + 1 < 10) {
-    date = d.getFullYear().toString() + "-0" + (d.getMonth() + 1).toString() + "-" + d.getDate().toString() + " " + d.getHours().toString() + ":" + d.getMinutes().toString() + ":" + d.getSeconds().toString() ;
+  if (d.getMonth() + 1 < 10) {
+    date = d.getFullYear().toString() + "-0" + (d.getMonth() + 1).toString() + "-" + d.getDate().toString() + " " + d.getHours().toString() + ":" + d.getMinutes().toString() + ":" + d.getSeconds().toString();
   } else {
-    date = d.getFullYear().toString() + "-" + (d.getMonth() + 1).toString() + "-" + d.getDate().toString() + " " + d.getHours().toString() + ":" + d.getMinutes().toString() + ":" + d.getSeconds().toString() ;
+    date = d.getFullYear().toString() + "-" + (d.getMonth() + 1).toString() + "-" + d.getDate().toString() + " " + d.getHours().toString() + ":" + d.getMinutes().toString() + ":" + d.getSeconds().toString();
   }
   return date;
 }
